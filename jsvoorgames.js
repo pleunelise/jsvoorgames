@@ -1,30 +1,33 @@
-var xCar = 50;
+var xCar;
+var yCar;
+var xSize = 400;
+var ySize = 180;
+var wheelSize;
 
 function setup() {
-  //Canvas van 200 px bij 200 px
-  createCanvas(200, 180);
-  //Één cijfer geeft grijswaarden
-  background(220);
+  createCanvas(xSize, ySize);
+  xCar = 50;
+  yCar = 100;
+  wheelSize = 24;
 }
 
 function draw() {
-    //Geen randen om de auto
+    background(220); //Één cijfer geeft grijswaarden
+    drawCar(xCar, yCar, wheelSize);
+    xCar += 1;
+};
+
+function drawCar(xCar, yCar, wheelSize){
     noStroke();
-    //Kies de opvulkleur (rgb)
-    fill(255, 220, 115);
-    //Parameters: x, y, breedte, hoogte
-    rect(xCar, 100, 110, 20);
-    rect(xCar + 10, 78, 70, 40);
+    fill(111, 120, 220);
+    rect(xCar, yCar, 110, 20);
+    rect(xCar + 10, yCar-22, 70, 40);
     // Wielen
-    //Witte randen voor de wielen
     stroke(255);
-    //Iets dikkere randen
     strokeWeight(2);
     fill(12, 66, 66);
-    //Parameters: x, y, breedte, hoogte
-    ellipse(xCar + 25, 121, 24, 24);
-    ellipse(xCar + 80, 121, 24, 24);
-    stroke(0); //Zwarte weg
-    //Parameters: x1,y1,x2,y2
-    line(0, 121+12, 200, 121+12);
-};
+    ellipse(xCar + 25, yCar + 21, wheelSize, wheelSize);
+    ellipse(xCar + 80, yCar + 21, wheelSize, wheelSize);
+    stroke(0);
+    line(0, yCar + 21 + wheelSize/2, width, yCar + 21 + wheelSize/2);
+}
