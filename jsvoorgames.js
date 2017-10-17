@@ -1,33 +1,20 @@
-var xCar;
-var yCar;
-var xSize = 400;
-var ySize = 180;
-var wheelSize;
+var ballx = 10;
+var bally = 100;
+var speedx = 2;
+var speedy = 3;
 
 function setup() {
-  createCanvas(xSize, ySize);
-  xCar = 50;
-  yCar = 100;
-  wheelSize = 24;
+  createCanvas(350, 350);
 }
 
 function draw() {
-    background(220); //Één cijfer geeft grijswaarden
-    drawCar(xCar, yCar, wheelSize);
-    xCar += 1;
-};
+  background(250)
+  rect(ballx, bally, 10, 10);
+  ballx += speedx;
+  bally += speedy;
+  if (bally > (350-10) || bally < 0)
+    speedy = -speedy;
+  if (ballx > (350-10) || ballx < 0)
+    speedx = -speedx;
 
-function drawCar(xCar, yCar, wheelSize){
-    noStroke();
-    fill(111, 120, 220);
-    rect(xCar, yCar, 110, 20);
-    rect(xCar + 10, yCar-22, 70, 40);
-    // Wielen
-    stroke(255);
-    strokeWeight(2);
-    fill(12, 66, 66);
-    ellipse(xCar + 25, yCar + 21, wheelSize, wheelSize);
-    ellipse(xCar + 80, yCar + 21, wheelSize, wheelSize);
-    stroke(0);
-    line(0, yCar + 21 + wheelSize/2, width, yCar + 21 + wheelSize/2);
 }
