@@ -1,34 +1,49 @@
-var ballx1 = 10;
-var bally1 = 100;
-var speedx1 = 2;
-var speedy1 = 3;
-var ballx2 = 20;
-var bally2 = 35;
-var speedx2 = 3;
-var speedy2 = 5;
-var ballx3 = 91;
-var bally3 = 199;
-var speedx3 = 4;
-var speedy3 = 6;
-
-function setup() {
-  createCanvas(400, 400);
+function setup(){
+  createCanvas(400,400);
 }
 
+function Ball(xx,yy){
+  this.x = xx;
+  this.y = yy;
+  this.speedx = 2;
+  this.speedy = 3;
+
+  this.update = function(){
+    this.x += this.speedx;
+    this.y += this.speedy;
+
+    if (this.y > (400-10) || this.y < 0){
+    this.speedy = -this.speedy;
+
+    if (this.x > (400-10) || this.x < 0){
+    this.speedx = -this.speedx;
+
+    }
+  }
+  this.teken = function () {
+
+  }
+
+ }
+
+
+
+}
+
+var balletje = new Ball(10,20);
+var balletje2 = new Ball(1,200);
+var balletje3 = new Ball(45,333);
+
+
+
 function draw() {
-  background(250)
-  rect(ballx1, bally1, 10, 10);
-  ballx1 += speedx1;
-  bally1 += speedy1;
-  rect(ballx2, bally2, 10, 10);
-  ballx2 += speedx2;
-  bally2 += speedy2;
-  rect(ballx3, bally3, 10, 10);
-  ballx3 += speedx3;
-  bally3 += speedy3;
-  if (bally > (400-10) || bally < 0)
-    speedy = -speedy;
-  if (ballx > (400-10) || ballx < 0)
-    speedx = -speedx;
+  background(240);
+  rect(balletje.x,balletje.y, 10,10);
+  rect(balletje2.x,balletje2.y, 10,10);
+  rect(balletje3.x,balletje3.y, 10,10);
+  balletje3.update();
+  balletje2.update();
+  balletje.update();
+
 
 }
