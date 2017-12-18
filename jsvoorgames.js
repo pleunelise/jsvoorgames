@@ -1,61 +1,62 @@
-var ySize= 400;
-var xSize= 400;
-var bal;
-var ballen = []; //Array waar de ballen in komen te staan
-var aantalBallen = 100;
+var radius = 10;
+var xSpeed = 10;
+var ySpeed = 0;
+var xSize = 800;
+var ySize = 200;
+var xBall = 21;
+var yBall = 190;
+
 
 function setup(){
-  createCanvas(xSize,ySize);
-
-  for (var i = 0; i < aantalBallen; i++){
-    bal = new Ball(random(20, 380), random(20, 380), random(5, 15), random(1,10), random(1,10)); //Maak een nieuwe instantie van Bal()
-    ballen.push(bal); //Push voegt de bal aan het einde van het array toe
-  }
+  createCanvas(xSize, ySize);
 }
 
 function draw(){
   background(255);
-  var r = random();
-  // ballen.length geeft de lengte van het ballenarray terug
-  for (var i = 0; i < ballen.length; i++){
-    bal = ballen[i]; //Haal een bal uit het array
-    bal.teken();
-    bal.update();
-    bal.botsCheck(speler);
+
+  ellipse(xBall, yBall, 2*radius, 2*radius);
+
+  if (yBall <= 0) {
+      yBall += 16;
+  } else if (yBall > height) {
+        yBall -= 16;
   }
+
+
+ }
+
+function keyPressed() {
+  if (keyCode == DOWN_ARROW) {
+    if(yBall == 190){
+      return
+    }
+    xBall += ySpeed, yBall += xSpeed;
+
+    //Ball();
+
+}
+  if (keyCode == UP_ARROW) {
+    if(yBall == 16){
+      return
+    }
+    xBall -= ySpeed, yBall -= xSpeed;
+  }
+
 }
 
-function Ball(xx,yy){
-  this.x = xx;
-  this.y = yy;
-  this.speedx = 4;
-  this.speedy = 5;
-
-  var dx = xpos2 - xpos1;
-  var dy = ypos2 - ypos1;
-  if (Math.sqrt(dx*dx + dy*dy) <= radius1 + radius2){
-  // Botsing!
-}
-
-  this.botsCheck = function(speler) {
-  // this.xpos geeft de xpos van het huidige balletje
-  // bal.xpos geeft de xpos van het balletje dat je meegeeft als argument
-  ...
-}
-
-  this.teken = function() {
-    ellipse(this.x, this.y,10, 10);
-  }
-
-  this.update = function(){
-    this.x += this.speedx;
-    this.y += this.speedy;
-
-    if (this.y > (ySize-10) || this.y < 0){
-    this.speedy = -this.speedy;
-  }
-    if (this.x > (xSize-10) || this.x < 0){
-    this.speedx = -this.speedx;
-  }
-  }
+  this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
 }
