@@ -32,8 +32,6 @@ function keyPressed() {
     }
     xBall += ySpeed, yBall += xSpeed;
 
-    //Ball();
-
 }
   if (keyCode == UP_ARROW) {
     if(yBall == 16){
